@@ -45,6 +45,7 @@ public class PomodoroWatch implements ActionListener  {
     final int restFinalTime =15;
     int numRest = 1;
 
+
     @Autowired
     PomodoroDao pomodoroDao;
 
@@ -62,7 +63,9 @@ public class PomodoroWatch implements ActionListener  {
             timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
 
             if (numRest ==5) {
-                reset(); }
+                reset();
+                return;
+            }
 
             if(minutes == 0 && seconds ==1 && !isResting) {
                 restingValues();
@@ -117,7 +120,7 @@ public class PomodoroWatch implements ActionListener  {
     private void pomodoroValues() {
 
         if(numRest==5)
-            timer.restart();
+            reset();
         else {
             minutesVariable = 2;
             secondsVariable = 60;
@@ -240,7 +243,7 @@ public class PomodoroWatch implements ActionListener  {
         task.setEditable(true);
         task.setText("");
         isFirstResting = true;
-        numRest = 0;
+        numRest = 1;
         warningLabel.setText("");
     }
 }
